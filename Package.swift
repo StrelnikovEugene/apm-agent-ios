@@ -13,9 +13,9 @@ let package = Package(
   ],
   products: [
     // Products define the executables and libraries a package produces, and make them visible to other package.
-    .library(name: "ElasticApm", type: .static, targets: ["ElasticApm"]),
-    .library(name: "MemorySampler", type: .static, targets: ["MemorySampler"]),
-    .library(name: "CPUSampler", type: .static, targets: ["CPUSampler"]),
+    .library(name: "ElasticApm", targets: ["ElasticApm"]),
+    .library(name: "MemorySampler", targets: ["MemorySampler"]),
+    .library(name: "CPUSampler", targets: ["CPUSampler"]),
   ],
   dependencies: [
     .package(url: "https://github.com/ashleymills/Reachability.swift", from: "5.2.4"),
