@@ -13,19 +13,21 @@ let package = Package(
   ],
   products: [
     // Products define the executables and libraries a package produces, and make them visible to other package.
-    .library(name: "ElasticApm", targets: ["ElasticApm"]),
-    .library(name: "MemorySampler", targets: ["MemorySampler"]),
-    .library(name: "CPUSampler", targets: ["CPUSampler"]),
+    .library(name: "ElasticApm", type: .static, targets: ["ElasticApm"]),
+    .library(name: "MemorySampler", type: .static, targets: ["MemorySampler"]),
+    .library(name: "CPUSampler", type: .static, targets: ["CPUSampler"]),
   ],
   dependencies: [
     .package(url: "https://github.com/ashleymills/Reachability.swift", from: "5.2.4"),
     .package(
       url: "https://github.com/open-telemetry/opentelemetry-swift", exact: "1.12.1"),
     .package(url: "https://github.com/MobileNativeFoundation/Kronos.git", .upToNextMajor(from: "4.2.2")),
-    .package(
-      url: "https://github.com/microsoft/plcrashreporter.git", .upToNextMajor(from: "1.0.0")),
   ],
   targets: [
+    .binaryTarget(
+            name: "CrashReporter",
+            path: "./CrashReporter.xcframework"
+        ),
     .target(
       name: "MemorySampler",
       dependencies: [
@@ -50,7 +52,7 @@ let package = Package(
         .product(name: "ResourceExtension", package: "opentelemetry-swift"),
         .product(name: "Reachability", package: "Reachability.swift"),
         .product(name: "Kronos", package: "Kronos"),
-        .product(name: "CrashReporter", package: "plcrashreporter"),
+        "CrashReporter",
         "MemorySampler",
         "CPUSampler",
       ],
